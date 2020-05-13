@@ -1,0 +1,13 @@
+<app-entity-created-info-message [show]="relationshipCreated"></app-entity-created-info-message>
+
+<app-main-section [formGroup]="relationshipForm" header="NEW RELATIONSHIP">
+    <ng-container form-button-section>
+        <button mat-flat-button color="primary"
+                *ngIf="createLinkHref"
+                [disabled]="relationshipForm.invalid"
+                (click)="create()">CREATE
+        </button>
+    </ng-container>
+
+    <app-relationship-form [relationshipForm]="relationshipForm"></app-relationship-form>
+</app-main-section>

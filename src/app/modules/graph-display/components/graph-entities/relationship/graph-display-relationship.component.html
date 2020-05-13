@@ -1,0 +1,28 @@
+<div class="container-fluid border-left-blue-line" *ngIf="entity">
+    <div class="row">
+        <div class="col-12">
+            <span class="header-lg">{{entity.type}}</span>
+            <mat-divider class="my-2"></mat-divider>
+            <app-label-value type="link"
+                             label="Source"
+                             [value]="entity.source.label"
+                             [routerLinkMetadata]="[RouteConstants.GRAPH_ENTITY_DETAIL_GENERIC, entity.source.links.self.href]">
+            </app-label-value>
+            <app-label-value type="link"
+                             label="Target"
+                             [value]="entity.target.label"
+                             [routerLinkMetadata]="[RouteConstants.GRAPH_ENTITY_DETAIL_GENERIC, entity.target.links.self.href]">
+            </app-label-value>
+            <app-label-value label="Description" [value]="entity.description"></app-label-value>
+            <app-label-value type="external-link"
+                             label="Information source"
+                             [value]="entity.informationSourceHost"
+                             [externalLink]="entity.informationSource"></app-label-value>
+        </div>
+
+        <div class="col-12 d-flex justify-content-end mt-2">
+            <a class="no-style" mat-flat-button color="accent" *ngIf="entity.links.self"
+               [routerLink]="[RouteConstants.RELATIONSHIP_DETAIL, entity.links.self.href]">DETAIL</a>
+        </div>
+    </div>
+</div>

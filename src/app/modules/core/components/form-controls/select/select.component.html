@@ -1,0 +1,13 @@
+<mat-form-field class="w-100">
+    <mat-select [matTooltip]="selectFormControl.errors | validatorMessage"
+                [matTooltipDisabled]="!selectFormControl.touched"
+                matTooltipPosition="below"
+                matTooltipClass="input-validator-messages-tooltip"
+                [formControl]="selectFormControl"
+                [placeholder]="placeholder"
+                [required]="FormUtil.hasRequiredField(selectFormControl)">
+        <mat-option *ngFor="let option of options" [value]="option.value">
+            {{option.label}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

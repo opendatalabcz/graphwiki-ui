@@ -1,0 +1,14 @@
+<app-section header="RELATED COMPLAINTS" *ngIf="relatedComplaints">
+    <div class="row">
+        <div class="col-6">
+            <app-complaint-related-list header="Current"
+                                        [complaints]="relatedComplaints.current"
+                                        matIcon="today"></app-complaint-related-list>
+        </div>
+        <div class="col-6">
+            <app-complaint-related-list header="Historic"
+                                        [complaints]="relatedComplaints.historic"
+                                        matIcon="history"></app-complaint-related-list>
+        </div>
+    </div>
+</app-section>

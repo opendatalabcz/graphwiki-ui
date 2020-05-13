@@ -1,0 +1,34 @@
+<app-main-section header="PERSON DETAIL" *ngIf="entity">
+    <ng-container form-button-section>
+        <button mat-flat-button color="accent"
+                *ngIf="entity.links._delete"
+                (click)="delete(entity.links._delete)">DELETE
+        </button>
+        <button mat-flat-button color="accent"
+                *ngIf="entity.links.complaintCreate"
+                [routerLink]="[RouteConstants.COMPLAINT_NEW, entity.links.complaintCreate.href]">COMPLAINT
+        </button>
+        <button mat-flat-button color="accent"
+                *ngIf="entity.links.update"
+                [routerLink]="[RouteConstants.PERSON_UPDATE, entity.links.self.href]">UPDATE
+        </button>
+        <button mat-flat-button color="primary"
+                *ngIf="entity.links.restore"
+                (click)="restore(entity.links.restore)">RESTORE
+        </button>
+        <button mat-flat-button color="primary"
+                *ngIf="entity.links.graph"
+                [routerLink]="[RouteConstants.GRAPH_DISPLAY, entity.links.graph.href]">GRAPH
+        </button>
+    </ng-container>
+
+    <app-person-overview [entity]="entity"></app-person-overview>
+
+    <app-relationship-related *ngIf="entity.links.relationships"
+                              [link]="entity.links.relationships"></app-relationship-related>
+
+    <app-complaint-related *ngIf="entity.links.complaintList"
+                           [link]="entity.links.complaintList"></app-complaint-related>
+
+    <app-history *ngIf="entity.links.history" [link]="entity.links.history"></app-history>
+</app-main-section>

@@ -1,0 +1,15 @@
+<mat-list>
+    <h3 mat-subheader>{{header}}</h3>
+    <ng-container *ngIf="complaints?.length">
+        <mat-list-item class="mat-list-item-link" *ngFor="let complaint of complaints">
+            <mat-icon mat-list-icon>{{matIcon}}</mat-icon>
+            <h4 mat-line>
+                <a [routerLink]="[RouteConstants.COMPLAINT_DETAIL, complaint.links.self.href]">{{complaint.title}}</a>
+                <span class="text-muted small"> (created {{MomentUtil.fromDateString(complaint.created) | amCalendar}}
+                    )</span>
+            </h4>
+            <p mat-line *ngIf="complaint.explanation">{{complaint.explanation}}</p>
+        </mat-list-item>
+    </ng-container>
+    <app-no-available-data *ngIf="!complaints?.length"></app-no-available-data>
+</mat-list>

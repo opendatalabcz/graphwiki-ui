@@ -1,0 +1,50 @@
+<app-main-section header="COMPLAINT DETAIL" *ngIf="complaint">
+    <ng-container form-button-section>
+        <app-task-buttons *ngIf="complaint.links.task"
+                          [link]="complaint.links.task"
+                          (stateChange)="getData()"></app-task-buttons>
+        <button mat-flat-button color="accent"
+                *ngIf="complaint.links.reject"
+                (click)="makeTransition(complaint.links.reject)">REJECT
+        </button>
+        <button mat-flat-button color="primary"
+                *ngIf="complaint.links.approve"
+                (click)="makeTransition(complaint.links.approve)">APPROVE
+        </button>
+    </ng-container>
+
+    <app-section header="OVERVIEW">
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <app-label-value label="Title" [value]="complaint.title"></app-label-value>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <app-label-value label="Explanation" [value]="complaint.explanation"></app-label-value>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <app-user-info label="Assignee" [link]="complaint.assignee"
+                               placeholder="unassigned"></app-user-info>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <app-label-badge label="State" [value]="complaint.state"
+                                 [badgeType]="complaint.state | complaintStateBadge"></app-label-badge>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <app-user-info label="Author" [link]="complaint.author"></app-user-info>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <app-label-value label="Created" [value]="complaint.created" type="date"></app-label-value>
+            </div>
+        </div>
+    </app-section>
+
+    <app-graph-entity-overview-generic [headerByType]="true"
+                                       [link]="complaint.links.entity"></app-graph-entity-overview-generic>
+
+    <app-comments *ngIf="complaint.links.commentList"
+                  [createLink]="complaint.links.commentCreate"
+                  [commentsLink]="complaint.links.commentList"></app-comments>
+
+    <app-complaint-related *ngIf="complaint.links.related"
+                           [link]="complaint.links.related"></app-complaint-related>
+</app-main-section>

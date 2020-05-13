@@ -1,0 +1,35 @@
+<app-section [header]="header">
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <app-label-value label="Full name"
+                             value="{{entity.gender | genderSalutation}} {{entity.givenName}} {{entity.familyName}}"
+                             [type]="headerLinkActive ? 'link' : 'text'"
+                             [routerLinkMetadata]="[RouteConstants.PERSON_DETAIL, entity.links.self.href]"></app-label-value>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-label-value label="Date of birth" [value]="entity.dateOfBirth" type="date"></app-label-value>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-label-value label="Nationality" [value]="entity.nationality"></app-label-value>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-label-value label="Occupation" [value]="entity.occupation"></app-label-value>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-label-value type="external-link"
+                             label="Information source"
+                             [value]="entity.informationSourceHost"
+                             [externalLink]="entity.informationSource"></app-label-value>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-label-badge label="State" [value]="entity.state"
+                             [badgeType]="entity.state | graphEntityStateBadge"></app-label-badge>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-user-info label="Author" [link]="entity.author"></app-user-info>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-label-value label="Created" [value]="entity.created" type="date"></app-label-value>
+        </div>
+    </div>
+</app-section>

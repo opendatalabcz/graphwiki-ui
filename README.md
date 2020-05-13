@@ -1,1 +1,1 @@
-# graphwiki-ui
+# GraphWiki UI

@@ -1,0 +1,7 @@
+<div class="navigation-panel-container">
+    <a mat-button *ngFor="let navigation of anchorNavigations"
+       class="navigation-panel"
+            [ngClass]="{'navigation-panel-active': navigation.active, 'text-muted': !navigation.active}"
+            (click)="scrollTo(navigation)">{{navigation.label}}
+    </a>
+</div>

@@ -1,0 +1,30 @@
+@import "node_modules/bootstrap/scss/mixins";
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "src/assets/scss/variables";
+@import "src/assets/scss/mixins";
+
+@include media-breakpoint-up(md) {
+  .blue-line-section {
+    padding-left: 1rem;
+    padding-right: 1rem
+  }
+}
+
+div.blue-line-section {
+  border: solid 1px $color-darker-grey;
+  border-top: solid 2px $color-dark-blue;
+  background-color: white;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  margin-bottom: 3rem;
+
+  .section-header-wrapper {
+    border-bottom: solid 2px $color-light-grey
+  }
+
+  span.section-header {
+    @include section-header-mixin;
+    font-size: 1.125rem;
+  }
+}

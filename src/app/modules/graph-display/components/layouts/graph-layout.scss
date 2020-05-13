@@ -1,0 +1,73 @@
+@import "src/assets/scss/variables";
+
+.graph-container {
+  min-height: 80vh !important;
+}
+
+// hover over svg icon - circle
+.icon {
+  pointer-events: none;
+}
+
+.circle-wrapper {
+  opacity: 0.25;
+  stroke: black;
+  stroke-width: 0.5;
+  transition: stroke-width 1s;
+  fill: $color-light-grey;
+
+  &:hover {
+    stroke-width: 2.5;
+  }
+}
+
+.circle-wrapper-active {
+  opacity: 0.6;
+  stroke-width: 1.0;
+  fill: $color-darker-grey;
+}
+
+.node-tooltip-actions {
+  a {
+    &:not(:first-child) {
+      margin-left: 0.5rem;
+    }
+
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.4);
+    color: black;
+    background-color: $color-light-grey;
+  }
+}
+
+::ng-deep {
+  .tooltip-bg-transparent {
+    .tooltip-inner {
+      background-color: inherit;
+    }
+
+    .arrow::before {
+      visibility: hidden;
+    }
+  }
+}
+
+// disable svg element focus on click
+g:focus {
+  outline: none !important;
+}
+
+.edge-line {
+  stroke: $color-graph-edge;
+  stroke-width: 2;
+  marker-end: url(#arrow);
+}
+
+.edge-label {
+  font-size: .6rem !important;
+  fill: $color-graph-edge-label;
+  text-anchor: middle;
+}
+
+.edge-marker {
+  fill: $color-graph-edge;
+}

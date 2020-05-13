@@ -1,0 +1,82 @@
+<form [formGroup]="searchForm" novalidate>
+    <div class="row">
+        <div [ngClass]="{'col-md-4 offset-md-4': searchInputCentered, 'col-md-6': !searchInputCentered}">
+            <app-input [inputFormControl]="searchForm.get(SearchFormAttributes.SEARCH_QUERY)"
+                       [minLengthHintValue]="InputLengthConfig.GRAPH_SEARCH_MIN_LENGTH"
+                       [showClearButton]="true"
+                       [placeholder]="searchInputPlaceholder"
+                       name="searchQuery">
+            </app-input>
+        </div>
+    </div>
+</form>
+
+<div class="row" *ngIf="searchResult"
+     infiniteScroll
+     [infiniteScrollDistance]="1"
+     [infiniteScrollThrottle]="50"
+     (scrolled)="searchNextPage()">
+    <div class="col-md-6 col-xs-12">
+        <mat-list *ngIf="personData">
+            <ng-container *ngIf="!(showSelected && entitySelected)">
+                <h3 mat-subheader class="font-weight-bold text-black">
+                    Persons ({{searchResult.personsAvailableCount}})</h3>
+            </ng-container>
+            <ng-container *ngIf="showSelected && entitySelected">
+                <h3 mat-subheader class="font-weight-bold text-black">Selected Person</h3>
+            </ng-container>
+            <mat-divider></mat-divider>
+            <mat-list-item class="mat-list-item-link mat-list-item-link-scalable"
+                           [ngClass]="{'border-left-blue-line': showSelected && entitySelected}"
+                           *ngFor="let person of personData"
+                           (click)="_selectPerson(person)">
+                <mat-icon mat-list-icon class="md-36">person</mat-icon>
+                <h4 mat-line>{{person.givenName}} {{person.familyName}}</h4>
+                <p mat-line>
+                    <span class="small text-muted" *ngIf="person.dateOfBirth">Date of birth:</span>
+                    {{person.dateOfBirth | date}}
+                </p>
+                <p mat-line></p>
+                <a mat-icon-button matTooltip="detail" *ngIf="showDetailButton && person.links.self"
+                   [routerLink]="[RouteConstants.GRAPH_ENTITY_DETAIL_GENERIC, person.links.self.href]">
+                    <mat-icon>description</mat-icon>
+                </a>
+            </mat-list-item>
+        </mat-list>
+    </div>
+
+    <div class="col-md-6 col-xs-12">
+        <mat-list *ngIf="companyData">
+            <ng-container *ngIf="!(showSelected && entitySelected)">
+                <h3 mat-subheader class="font-weight-bold text-black">
+                    Companies ({{searchResult.companiesAvailableCount}})</h3>
+            </ng-container>
+            <ng-container *ngIf="showSelected && entitySelected">
+                <h3 mat-subheader class="font-weight-bold text-black">Selected Company</h3>
+            </ng-container>
+            <mat-divider></mat-divider>
+            <mat-list-item class="mat-list-item-link mat-list-item-link-scalable"
+                           [ngClass]="{'border-left-blue-line': showSelected && entitySelected}"
+                           *ngFor="let company of companyData"
+                           (click)="_selectCompany(company)">
+                <mat-icon mat-list-icon class="md-36">business</mat-icon>
+                <h4 mat-line>{{company.officialName}}</h4>
+                <p mat-line><span class="small text-muted">CRN:</span> {{company.registrationNumber}}</p>
+                <p mat-line class="font-italic">{{company.headquarters | address}}</p>
+                <a mat-icon-button matTooltip="detail" *ngIf="showDetailButton && company.links.self"
+                   [routerLink]="[RouteConstants.GRAPH_ENTITY_DETAIL_GENERIC, company.links.self.href]">
+                    <mat-icon>description</mat-icon>
+                </a>
+            </mat-list-item>
+        </mat-list>
+    </div>
+
+    <div class="col-md-4 offset-md-4 mt-4" *ngIf="showSelected && entitySelected">
+        <a mat-button class="bg-light-grey w-100" (click)="unselect()">
+            SHOW ALL AVAILABLE
+        </a>
+    </div>
+    <div class="col-md-4 offset-md-4" *ngIf="!searchResult.anyDataAvailable">
+        <app-no-available-data></app-no-available-data>
+    </div>
+</div>

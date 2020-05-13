@@ -1,0 +1,38 @@
+<div class="border-bottom py-2">
+    <ng-container *ngIf="!commentTreeNode._updateInputVisible">
+        <h6>
+            <app-user-info [link]="commentTreeNode.comment.author" styleClasses="pseudo-link-active" layout="span"></app-user-info>
+            <span class="text-muted small"> added a comment - {{commentTreeNode.comment.created | amTimeAgo}}</span>
+        </h6>
+        <div>{{commentTreeNode.comment.text}}</div>
+        <ul class="comment-actions">
+            <li *ngIf="commentTreeNode.comment.links.reply"
+                (click)="commentTreeNode.replyInputVisible(true)">reply
+            </li>
+            <li [ngClass]="{'action-disabled': !commentTreeNode.comment.links.update}"
+                (click)="commentTreeNode.comment.links.update && commentTreeNode.updateInputVisible(true)">edit
+            </li>
+            <li [ngClass]="{'action-disabled': !commentTreeNode.comment.links._delete}"
+                (click)="commentTreeNode.comment.links._delete && delete(commentTreeNode.comment)">delete
+            </li>
+        </ul>
+    </ng-container>
+
+    <app-comment-input *ngIf="commentTreeNode._replyInputVisible"
+                       [parentForm]="commentTreeNode.replyForm"
+                       [textFormControlName]="CommentFormAttributes.TEXT"
+                       label="Reply to comment"
+                       actionLabel="Reply"
+                       (action)="reply(commentTreeNode)"
+                       (cancel)="commentTreeNode.replyInputVisible(false)">
+    </app-comment-input>
+
+    <app-comment-input *ngIf="commentTreeNode._updateInputVisible"
+                       [parentForm]="commentTreeNode.updateForm"
+                       [textFormControlName]="CommentFormAttributes.TEXT"
+                       label="Edit comment"
+                       actionLabel="Save"
+                       (action)="update(commentTreeNode)"
+                       (cancel)="commentTreeNode.updateInputVisible(false)">
+    </app-comment-input>
+</div>

@@ -1,0 +1,8 @@
+@import "src/assets/scss/variables";
+
+.graph-layout-wrapper {
+  border: solid 1px $color-darker-grey;
+  border-top: solid 2px $color-dark-blue;
+  background-color: transparent;
+  margin-bottom: 3rem;
+}

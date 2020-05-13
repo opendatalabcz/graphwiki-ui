@@ -1,0 +1,38 @@
+<app-section [header]="header">
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <app-label-value label="Official name"
+                             [value]="entity.officialName"
+                             [type]="headerLinkActive ? 'link' : 'text'"
+                             [routerLinkMetadata]="[RouteConstants.COMPANY_DETAIL, entity.links.self.href]"></app-label-value>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-label-value label="Registration number" [value]="entity.registrationNumber"></app-label-value>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-label-value label="Inception" [value]="entity.inception" type="date"></app-label-value>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-label-value label="Industry" [value]="entity.industry"></app-label-value>
+        </div>
+        <div class="col-12">
+            <app-label-value label="Headquarters" [value]="entity.headquarters | address"></app-label-value>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-label-value type="external-link"
+                             label="Information source"
+                             [value]="entity.informationSourceHost"
+                             [externalLink]="entity.informationSource"></app-label-value>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-label-badge label="State" [value]="entity.state"
+                             [badgeType]="entity.state | graphEntityStateBadge"></app-label-badge>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-user-info label="Author" [link]="entity.author"></app-user-info>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-label-value label="Created" [value]="entity.created" type="date"></app-label-value>
+        </div>
+    </div>
+</app-section>

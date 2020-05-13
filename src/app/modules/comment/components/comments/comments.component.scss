@@ -1,0 +1,11 @@
+:host ::ng-deep {
+  div.comment-input-actions {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
+
+    button:not(:first-child) {
+      margin-left: 0.5rem;
+    }
+  }
+}

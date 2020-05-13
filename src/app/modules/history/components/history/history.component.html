@@ -1,0 +1,33 @@
+<app-section header="HISTORY">
+    <div class="row">
+        <div class="col-12" *ngIf="historyList?.length">
+            <mat-list class="mat-list-bordered">
+                <mat-list-item class="mat-list-item-word-wrap" *ngFor="let history of historyList">
+                    <app-acronym-icon mat-list-icon class="w-auto h-auto"
+                                      [colorClass]="history.type | historyTypeAcronymColor"
+                                      [acronym]="history.author | username | async | acronym"></app-acronym-icon>
+                    <h6 mat-line class="mb-1">
+                        <app-user-info [link]="history.author" styleClasses="pseudo-link-active" layout="span"></app-user-info>
+                        <span class="text-muted small"> {{getActionLabel(history)}}
+                            - {{history.created | amTimeAgo}}</span>
+                    </h6>
+                    <ng-container mat-line>
+                        <div *ngIf="history.relatedEntity?.href" class="font-italic">See
+                            <a [routerLink]="[getRouterConstant(history), history.relatedEntity.href]">detail</a>
+                            for more information
+                        </div>
+
+                        <div *ngIf="history.previousState && history.currentState">
+                            <span class="badge {{history.previousState | graphEntityStateBadge}}">{{history.previousState}}</span>
+                            <mat-icon>arrow_right_alt</mat-icon>
+                            <span class="badge {{history.currentState | graphEntityStateBadge}}">{{history.currentState}}</span>
+                        </div>
+                    </ng-container>
+                </mat-list-item>
+            </mat-list>
+        </div>
+        <div class="col-md-4 offset-md-4" *ngIf="!historyList?.length">
+            <app-no-available-data></app-no-available-data>
+        </div>
+    </div>
+</app-section>

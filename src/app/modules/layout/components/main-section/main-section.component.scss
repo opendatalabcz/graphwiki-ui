@@ -1,0 +1,14 @@
+@import "src/assets/scss/mixins";
+
+span.form-header {
+  @include section-header-mixin;
+  font-size: 1.5rem;
+}
+
+:host ::ng-deep {
+  .button-wrapper {
+    button:not(:first-child) {
+      margin-left: 0.5rem;
+    }
+  }
+}

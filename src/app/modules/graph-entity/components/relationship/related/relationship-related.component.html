@@ -1,0 +1,16 @@
+<app-section header="RELATED RELATIONSHIPS" *ngIf="relationships">
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <app-relationship-related-list header="Incoming"
+                                           matIconType="call_received"
+                                           [relationships]="relationships.incoming"
+                                           [otherVertexResolver]="sourceVertexResolver"></app-relationship-related-list>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-relationship-related-list header="Outgoing"
+                                           matIconType="call_made"
+                                           [relationships]="relationships.outgoing"
+                                           [otherVertexResolver]="targetVertexResolver"></app-relationship-related-list>
+        </div>
+    </div>
+</app-section>

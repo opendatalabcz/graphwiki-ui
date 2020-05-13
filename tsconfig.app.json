@@ -1,0 +1,56 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "types": [],
+    "paths": {
+      "@environment/*": [
+        "src/environments/*"
+      ],
+      "@comment/*": [
+        "src/app/modules/comment/*"
+      ],
+      "@complaint/*": [
+        "src/app/modules/complaint/*"
+      ],
+      "@core/*": [
+        "src/app/modules/core/*"
+      ],
+      "@graph-display/*": [
+        "src/app/modules/graph-display/*"
+      ],
+      "@graph-entity/*": [
+        "src/app/modules/graph-entity/*"
+      ],
+      "@search/*": [
+        "src/app/modules/search/*"
+      ],
+      "@history/*": [
+        "src/app/modules/history/*"
+      ],
+      "@layout/*": [
+        "src/app/modules/layout/*"
+      ],
+      "@task/*": [
+        "src/app/modules/task/*"
+      ],
+      "@user/*": [
+        "src/app/modules/user/*"
+      ],
+      "@src/*": [
+        "src/app/*"
+      ]
+    }
+  },
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ],
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/test.ts",
+    "src/**/*.spec.ts"
+  ]
+}

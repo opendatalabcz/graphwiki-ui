@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6 col-xs-12">
+            <app-section header="SIGN IN">
+                <form [formGroup]="loginForm" novalidate>
+                    <app-error *ngIf="invalidCredentialsError" [errors]="[invalidCredentialsError]"></app-error>
+                    <app-input [inputFormControl]="loginForm.get(LoginFormAttributes.USERNAME)"
+                               type="email"
+                               name="email"
+                               placeholder="Enter your email">
+                    </app-input>
+                    <app-input [inputFormControl]="loginForm.get(LoginFormAttributes.PASSWORD)"
+                               type="password"
+                               name="password"
+                               placeholder="Enter your password">
+                    </app-input>
+                    <button mat-flat-button color="primary" class="mt-3 w-100"
+                            (click)="login()"
+                            [disabled]="loginForm.invalid">LOGIN
+                    </button>
+                </form>
+            </app-section>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<app-section [header]="header" *ngIf="entity">
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <app-label-value label="Type"
+                             additionalDescription="(see detail)"
+                             [value]="entity.type"
+                             [type]="headerLinkActive ? 'link' : 'text'"
+                             [routerLinkMetadata]="[RouteConstants.RELATIONSHIP_DETAIL, entity.links.self.href]">
+            </app-label-value>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-label-value label="Description"
+                             [value]="entity.description"></app-label-value>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-label-value type="link"
+                             label="Source"
+                             [value]="entity.source.label"
+                             [routerLinkMetadata]="[RouteConstants.GRAPH_ENTITY_DETAIL_GENERIC, entity.source.links.self.href]">
+            </app-label-value>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-label-value type="link"
+                             label="Target"
+                             [value]="entity.target.label"
+                             [routerLinkMetadata]="[RouteConstants.GRAPH_ENTITY_DETAIL_GENERIC, entity.target.links.self.href]">
+            </app-label-value>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-label-value type="external-link"
+                             label="Information source"
+                             [value]="entity.informationSourceHost"
+                             [externalLink]="entity.informationSource"></app-label-value>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-label-badge label="State" [value]="entity.state"
+                             [badgeType]="entity.state | graphEntityStateBadge"></app-label-badge>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-user-info label="Author" [link]="entity.author"></app-user-info>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <app-label-value label="Created" [value]="entity.created"
+                             type="date"></app-label-value>
+        </div>
+    </div>
+</app-section>

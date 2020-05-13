@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6 col-xs-12">
+            <app-section header="CREATE YOUR ACCOUNT">
+                <form [formGroup]="registerForm" novalidate>
+                    <app-input [inputFormControl]="registerForm.get(RegisterFormAttributes.GIVEN_NAME)"
+                               name="givenName"
+                               placeholder="Given name">
+                    </app-input>
+                    <app-input [inputFormControl]="registerForm.get(RegisterFormAttributes.FAMILY_NAME)"
+                               name="familyName"
+                               placeholder="Family name">
+                    </app-input>
+                    <app-input [inputFormControl]="registerForm.get(RegisterFormAttributes.EMAIL)"
+                               [minLengthHintValue]="InputLengthConfig.LOGIN_USERNAME_MIN_LENGTH"
+                               type="email"
+                               name="email"
+                               placeholder="Email">
+                    </app-input>
+                    <app-input [inputFormControl]="registerForm.get(RegisterFormAttributes.PASSWORD)"
+                               [minLengthHintValue]="InputLengthConfig.LOGIN_PASSWORD_MIN_LENGTH"
+                               type="password"
+                               name="password"
+                               placeholder="Password"
+                               autocomplete="new-password">
+                    </app-input>
+                    <app-input [inputFormControl]="registerForm.get(RegisterFormAttributes.CONFIRMED_PASSWORD)"
+                               type="password"
+                               name="confirmedPassword"
+                               placeholder="Confirm password"
+                               autocomplete="new-password">
+                    </app-input>
+                    <button mat-flat-button color="primary" class="mt-3 w-100"
+                            (click)="register()"
+                            [disabled]="registerForm.invalid">SIGN UP
+                    </button>
+                </form>
+            </app-section>
+        </div>
+    </div>
+</div>

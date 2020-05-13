@@ -1,0 +1,19 @@
+@import "variables";
+
+.bg-light-grey {
+  background-color: $color-light-grey;
+}
+
+.border-left-blue-line {
+  border-left: solid 2px $color-dark-blue;
+}
+
+.input-validator-messages-tooltip {
+  background-color: $color-invalid-input;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  font-size: .8rem;
+  white-space: pre-line;
+  min-width: 10rem;
+  text-align: center;
+}

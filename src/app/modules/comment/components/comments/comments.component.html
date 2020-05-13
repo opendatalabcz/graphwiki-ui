@@ -1,0 +1,46 @@
+<app-section header="COMMENTS">
+    <div class="row">
+        <div class="col-12" *ngIf="dataSource.data?.length">
+            <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                <!-- This is the tree node template for leaf nodes -->
+                <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding matTreeNodePaddingIndent="5%">
+                    <button mat-icon-button disabled></button>
+                    <app-comment-item class="w-100"
+                                      [commentTreeNode]="node"
+                                      (action)="loadComments()"></app-comment-item>
+                </mat-tree-node>
+                <!-- This is the tree node template for expandable nodes -->
+                <mat-tree-node *matTreeNodeDef="let node;when: hasChild"
+                               matTreeNodePadding
+                               matTreeNodePaddingIndent="5%">
+                    <button mat-icon-button matTreeNodeToggle>
+                        <mat-icon>{{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}</mat-icon>
+                    </button>
+                    <app-comment-item class="w-100"
+                                      [commentTreeNode]="node"
+                                      (action)="loadComments()"></app-comment-item>
+                </mat-tree-node>
+            </mat-tree>
+        </div>
+
+        <div class="col-12" *ngIf="!dataSource.data?.length">
+            <app-no-available-data></app-no-available-data>
+        </div>
+
+        <div class="col-12" *ngIf="createLink">
+            <div class="mt-2 d-flex justify-content-end">
+                <button mat-flat-button color="accent"
+                        (click)="showHideCommentInput(true)">Comment
+                </button>
+            </div>
+            <app-comment-input *ngIf="commentInputVisible"
+                               [parentForm]="commentForm"
+                               [textFormControlName]="CommentFormAttributes.TEXT"
+                               label="Comment"
+                               actionLabel="Add"
+                               (action)="createComment()"
+                               (cancel)="showHideCommentInput(false)">
+            </app-comment-input>
+        </div>
+    </div>
+</app-section>

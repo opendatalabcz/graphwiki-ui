@@ -1,0 +1,43 @@
+<form [formGroup]="addressForm" novalidate>
+    <app-section [header]="header">
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <app-input [inputFormControl]="addressForm.get(AddressFormAttributes.STREET)"
+                           name="street"
+                           placeholder="Street"></app-input>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <div class="row">
+                    <div class="col-md-6 col-xs-12">
+                        <app-input [inputFormControl]="addressForm.get(AddressFormAttributes.LAND_REGISTRY_NUMBER)"
+                                   type="number"
+                                   name="landRegistryNumber"
+                                   placeholder="Land registry number"></app-input>
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        <app-input [inputFormControl]="addressForm.get(AddressFormAttributes.HOUSE_NUMBER)"
+                                   type="number"
+                                   name="houseNumber"
+                                   placeholder="House number"></app-input>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <app-input [inputFormControl]="addressForm.get(AddressFormAttributes.POSTAL_CODE)"
+                           name="postalCode"
+                           placeholder="Postal code"></app-input>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <app-input [inputFormControl]="addressForm.get(AddressFormAttributes.CITY)"
+                           name="city"
+                           placeholder="City"></app-input>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <app-autocomplete [autocompleteFormControl]="addressForm.get(AddressFormAttributes.COUNTRY)"
+                                  [options]="countryOptions"
+                                  name="country"
+                                  placeholder="Country"></app-autocomplete>
+            </div>
+        </div>
+    </app-section>
+</form>

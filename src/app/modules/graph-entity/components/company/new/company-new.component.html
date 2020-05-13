@@ -1,0 +1,13 @@
+<app-entity-created-info-message [show]="companyCreated"></app-entity-created-info-message>
+
+<app-main-section [formGroup]="companyForm" header="NEW COMPANY">
+    <ng-container form-button-section>
+        <button mat-flat-button color="primary"
+                *ngIf="createLinkHref"
+                [disabled]="companyForm.invalid"
+                (click)="create()">CREATE
+        </button>
+    </ng-container>
+
+    <app-company-form [companyForm]="companyForm"></app-company-form>
+</app-main-section>

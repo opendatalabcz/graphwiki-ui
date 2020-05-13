@@ -1,0 +1,67 @@
+<div class="header-shape"></div>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+    <a class="navbar-brand font-weight-bold" [routerLink]="RouteConstants.SEARCH">GraphWiki</a>
+
+    <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
+        <div class="navbar-nav">
+            <a class="no-style" mat-button [routerLink]="RouteConstants.SEARCH">Search In Graph</a>
+            <a class="no-style" mat-button [matMenuTriggerFor]="addEntityMenu"
+               *ngIf="(entryEndpointService.getGraphApplicationEntryActions() | async)?.personCreate ||
+            (entryEndpointService.getGraphApplicationEntryActions() | async)?.companyCreate ||
+            (entryEndpointService.getGraphApplicationEntryActions() | async)?.relationshipCreate">Add Entity</a>
+            <a class="no-style" mat-button [routerLink]="RouteConstants.ABOUT">About</a>
+        </div>
+
+        <div class="navbar-nav ml-auto">
+            <ng-container *ngIf="(entryEndpointService.getTaskApplicationEntryActions() | async)?.taskInboxPrivate ||
+                (entryEndpointService.getTaskApplicationEntryActions() | async)?.taskInboxTeam">
+                <a mat-button [routerLink]="RouteConstants.TASK_INBOX">
+                    <mat-icon matTooltip="Inbox"
+                              [matBadge]="openTaskCountObservable | async"
+                              matBadgeColor="warn">inbox
+                    </mat-icon>
+                </a>
+            </ng-container>
+            <ng-container *ngIf="authInfo">
+                <a mat-button class="no-style" [routerLink]="RouteConstants.CURRENT_USER">
+                    <mat-icon>person</mat-icon>
+                    {{authInfo.givenName}} {{authInfo.familyName}}
+                </a>
+            </ng-container>
+            <ng-container *ngIf="!authInfo">
+                <a mat-button [routerLink]="RouteConstants.LOGIN" class="no-style">Sign in</a>
+                <a mat-button [routerLink]="RouteConstants.USER_REGISTER" class="no-style">Sign up</a>
+            </ng-container>
+            <ng-container *ngIf="authInfo">
+                <a mat-button (click)="logout()" class="no-style">Logout</a>
+            </ng-container>
+        </div>
+
+        <mat-menu #addEntityMenu="matMenu">
+            <button mat-menu-item
+                    *ngIf="(entryEndpointService.getGraphApplicationEntryActions() | async)?.personCreate"
+                    [routerLink]="[RouteConstants.PERSON_NEW, (entryEndpointService.getGraphApplicationEntryActions() | async).personCreate.href]">
+                <mat-icon>person</mat-icon>
+                Person
+            </button>
+            <button mat-menu-item
+                    *ngIf="(entryEndpointService.getGraphApplicationEntryActions() | async)?.companyCreate"
+                    [routerLink]="[RouteConstants.COMPANY_NEW, (entryEndpointService.getGraphApplicationEntryActions() | async).companyCreate.href]">
+                <mat-icon>business</mat-icon>
+                Company
+            </button>
+            <button mat-menu-item
+                    *ngIf="(entryEndpointService.getGraphApplicationEntryActions() | async)?.relationshipCreate"
+                    [routerLink]="[RouteConstants.RELATIONSHIP_NEW, (entryEndpointService.getGraphApplicationEntryActions() | async).relationshipCreate.href]">
+                <mat-icon>shuffle</mat-icon>
+                Relationship
+            </button>
+        </mat-menu>
+    </div>
+
+    <button class="navbar-toggler" type="button"
+            (click)="toggleNavbar()">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>

@@ -1,0 +1,33 @@
+<app-main-section *ngIf="complaintSetup" [formGroup]="complaintForm" header="NEW COMPLAINT">
+    <ng-container form-button-section>
+        <button mat-flat-button color="accent"
+                (click)="cancel()">CANCEL
+        </button>
+        <button mat-flat-button color="primary"
+                [disabled]="complaintForm.invalid || !complaintSetup.links.create"
+                (click)="create()">CREATE
+        </button>
+    </ng-container>
+
+    <app-graph-entity-overview-generic header="ENTITY"
+                                       [link]="complaintSetup.links.entity"></app-graph-entity-overview-generic>
+
+    <app-section header="NEW COMPLAINT INPUTS">
+        <div class="row">
+            <div class="col-12">
+                <app-input [inputFormControl]="complaintForm.get(ComplaintFormAttributes.TITLE)"
+                           name="title"
+                           placeholder="Title"></app-input>
+            </div>
+            <div class="col-12">
+                <app-textarea
+                        [inputFormControl]="complaintForm.get(ComplaintFormAttributes.EXPLANATION)"
+                        appearance="legacy"
+                        name="explanation"
+                        placeholder="Explanation"></app-textarea>
+            </div>
+        </div>
+    </app-section>
+
+    <app-complaint-related [link]="complaintSetup.links.related"></app-complaint-related>
+</app-main-section>

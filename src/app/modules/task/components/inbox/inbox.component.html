@@ -1,0 +1,31 @@
+<app-section header="INBOX">
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <nav mat-tab-nav-bar>
+                <a mat-tab-link *ngIf="(teamInboxLink || teamInboxWithAssignedLink)" (click)="activeTab = TABS.TEAM"
+                   [active]="activeTab === TABS.TEAM">Team</a>
+                <a mat-tab-link *ngIf="privateInboxLink" (click)="activeTab = TABS.PRIVATE"
+                   [active]="activeTab === TABS.PRIVATE">Private</a>
+            </nav>
+        </div>
+        <div class="col-md-4 col-xs-6 mt-1">
+            <app-input [inputFormControl]="searchFormControl"
+                       [showClearButton]="true"
+                       name="taskSearchQuery"
+                       placeholder="Search query"></app-input>
+        </div>
+        <div class="col-md-2 col-xs-6 d-flex align-items-center">
+            <span class="small text-muted" *ngIf="teamInboxWithAssignedLink">
+                <mat-checkbox color="primary" [formControl]="showAssignedFormControl">Show Assigned</mat-checkbox>
+            </span>
+        </div>
+    </div>
+
+    <app-task-table *ngIf="activeTab === TABS.TEAM && (teamInboxLink || teamInboxWithAssignedLink)"
+                    [link]="showAssignedTasks ? teamInboxWithAssignedLink : teamInboxLink"
+                    [searchFormControl]="searchFormControl"></app-task-table>
+
+    <app-task-table *ngIf="activeTab === TABS.PRIVATE && privateInboxLink"
+                    [link]="privateInboxLink"
+                    [searchFormControl]="searchFormControl"></app-task-table>
+</app-section>

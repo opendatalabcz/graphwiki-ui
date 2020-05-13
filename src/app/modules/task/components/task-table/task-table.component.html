@@ -1,0 +1,62 @@
+<table mat-table [dataSource]="dataSource" matSort class="w-100">
+
+    <ng-container [matColumnDef]="TABLE_COLUMNS.ICONS">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let row">
+            <mat-icon *ngIf="castToMatTableTaskTO(row).taskTO.assignee" matTooltip="Task assigned">lock</mat-icon>
+        </td>
+    </ng-container>
+
+    <ng-container [matColumnDef]="TABLE_COLUMNS.OVERVIEW">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Overview</th>
+        <td mat-cell *matCellDef="let row">
+            <a [routerLink]="[getRouteConstant(castToMatTableTaskTO(row).taskTO.type), castToMatTableTaskTO(row).taskTO.links.entity.href]">
+                {{castToMatTableTaskTO(row).taskTO.label}}</a>
+            <span class="badge {{castToMatTableTaskTO(row).taskTO.type | taskTypeBadge}} ml-2"> {{castToMatTableTaskTO(row).taskTO.type}}</span>
+        </td>
+    </ng-container>
+
+    <ng-container [matColumnDef]="TABLE_COLUMNS.AUTHOR">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Author</th>
+        <td mat-cell *matCellDef="let row">
+            <app-user-info [user]="castToMatTableTaskTO(row)?.author" layout="span"></app-user-info>
+        </td>
+    </ng-container>
+
+    <ng-container [matColumnDef]="TABLE_COLUMNS.ASSIGNEE">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Assignee</th>
+        <td mat-cell *matCellDef="let row">
+            <app-user-info [user]="castToMatTableTaskTO(row)?.assignee" layout="span"></app-user-info>
+        </td>
+    </ng-container>
+
+    <ng-container [matColumnDef]="TABLE_COLUMNS.CREATED">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Created</th>
+        <td mat-cell *matCellDef="let row">
+            {{MomentUtil.fromDateString(castToMatTableTaskTO(row).taskTO.created) | amCalendar}}
+        </td>
+    </ng-container>
+
+    <ng-container [matColumnDef]="TABLE_COLUMNS.STATE">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> State</th>
+        <td mat-cell *matCellDef="let row">
+            {{castToMatTableTaskTO(row).taskTO.state}}
+        </td>
+    </ng-container>
+
+    <ng-container [matColumnDef]="TABLE_COLUMNS.ASSIGN_LINK">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Assign</th>
+        <td mat-cell *matCellDef="let row">
+            <a mat-icon-button *ngIf="castToMatTableTaskTO(row).taskTO.links.assign"
+               (click)="assign(castToMatTableTaskTO(row).taskTO)">
+                <mat-icon>input</mat-icon>
+            </a>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="pageSizeOptions"></mat-paginator>

@@ -1,0 +1,22 @@
+<ng-container *ngIf="layout === 'paragraph'">
+    <p class="small text-muted mb-1">{{label}}</p>
+    <p *ngIf="user">
+        <ng-container *ngTemplateOutlet="userInfoTemplate"></ng-container>
+    </p>
+    <p *ngIf="!user" class="font-italic small text-muted">{{placeholder}}</p>
+</ng-container>
+
+<ng-container *ngIf="layout === 'span'">
+    <span class="small text-muted mb-1">{{label}}</span>
+    <span *ngIf="user">
+        <ng-container *ngTemplateOutlet="userInfoTemplate"></ng-container>
+    </span>
+    <span *ngIf="!user" class="font-italic small text-muted">{{placeholder}}</span>
+</ng-container>
+
+<ng-template #userInfoTemplate>
+    <span class="pseudo-link underline-dotted {{styleClasses}}"
+          [matTooltip]="getTooltip()"
+          matTooltipPosition="below"
+          matTooltipClass="multiline-tooltip">{{user.givenName}} {{user.familyName}}</span>
+</ng-template>

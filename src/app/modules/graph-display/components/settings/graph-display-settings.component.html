@@ -1,0 +1,51 @@
+<div class="row" *ngIf="settings">
+    <div class="col">
+        <div class="d-flex justify-content-start">
+            <button mat-icon-button matTooltip="Click to go back"
+                    [matTooltipDisabled]="!(locationBackwardAvailable | async)"
+                    [disabled]="!(locationBackwardAvailable | async)"
+                    (click)="routingService.locationBackward()">
+                <mat-icon>arrow_back_ios</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Click to go forward"
+                    [matTooltipDisabled]="!(routingService.locationForwardAvailable() | async)"
+                    [disabled]="!(routingService.locationForwardAvailable() | async)"
+                    (click)="routingService.locationForward()">
+                <mat-icon>arrow_forward_ios</mat-icon>
+            </button>
+            <a mat-icon-button (click)="settings.userInteraction.refreshSubject.next(true)" matTooltip="Reload data">
+                <mat-icon>refresh</mat-icon>
+            </a>
+        </div>
+    </div>
+
+    <div class="col d-flex justify-content-center">
+        <button mat-icon-button matTooltip="Hierarchical layout" (click)="settings.setLayout(LayoutType.HIERARCHICAL)">
+            <mat-icon>account_tree</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Organical layout" (click)="settings.setLayout(LayoutType.ORGANICAL)">
+            <mat-icon>timeline</mat-icon>
+        </button>
+    </div>
+
+    <div class="col d-flex justify-content-end" *ngIf="links">
+        <a mat-icon-button matTooltip="Export"
+           [matMenuTriggerFor]="exportMenu"
+           *ngIf="links.exportGraphML || links.exportClueMaker">
+            <mat-icon>save_alt</mat-icon>
+        </a>
+
+        <mat-menu #exportMenu="matMenu">
+            <button mat-menu-item
+                    *ngIf="links.exportGraphML"
+                    (click)="settings.actions.export.next(links.exportGraphML)">GraphML
+            </button>
+            <button mat-menu-item
+                    *ngIf="links.exportClueMaker"
+                    (click)="settings.actions.export.next(links.exportClueMaker)">
+                ClueMaker
+            </button>
+        </mat-menu>
+    </div>
+</div>
+<mat-divider></mat-divider>

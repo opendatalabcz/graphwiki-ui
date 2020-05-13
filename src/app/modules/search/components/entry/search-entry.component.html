@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-md-8 offset-md-2 col-xs-12 my-4 text-center">
+        <span class="display-5 d-block">Finding relations is now fast and simple</span>
+        <span class="text-muted d-block"
+              *ngIf="(entryEndpointService.getGraphApplicationEntryActions() | async)?.personCreate ||
+            (entryEndpointService.getGraphApplicationEntryActions() | async)?.companyCreate ||
+            (entryEndpointService.getGraphApplicationEntryActions() | async)?.relationshipCreate">Feel free to add new
+                <a [routerLink]="[RouteConstants.PERSON_NEW, (entryEndpointService.getGraphApplicationEntryActions() | async).personCreate.href]">persons</a>,
+                <a [routerLink]="[RouteConstants.COMPANY_NEW, (entryEndpointService.getGraphApplicationEntryActions() | async).companyCreate.href]">companies</a> or
+                <a [routerLink]="[RouteConstants.RELATIONSHIP_NEW, (entryEndpointService.getGraphApplicationEntryActions() | async)?.relationshipCreate.href]">relationships</a>
+            </span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-10 offset-1">
+        <app-search [selectedVertexFormControl]="selectedVertexFormControl"
+                    [useLocalStorageQuery]="true"
+                    [searchInputCentered]="true"
+                    [showDetailButton]="true"
+                    searchInputPlaceholder="Enter person or company name"></app-search>
+    </div>
+</div>

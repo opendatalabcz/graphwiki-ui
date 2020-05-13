@@ -1,0 +1,51 @@
+<form [formGroup]="personForm" novalidate>
+    <app-section header="BASIC INFORMATION" *ngIf="personForm">
+        <div class="row">
+            <div class="col-6 cl-xs-12">
+                <app-select [selectFormControl]="personForm.get(PersonFormAttributes.GENDER)"
+                            [options]="genders"
+                            placeholder="Salutation"></app-select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <app-input [inputFormControl]="personForm.get(PersonFormAttributes.GIVEN_NAME)"
+                           name="givenName"
+                           placeholder="Given name"></app-input>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <app-input [inputFormControl]="personForm.get(PersonFormAttributes.FAMILY_NAME)"
+                           name="familyName"
+                           placeholder="Family name"></app-input>
+            </div>
+            <div class="col-md-6 cl-xs-12">
+                <app-date-picker [dateInputFormControl]="personForm.get(PersonFormAttributes.DATE_OF_BIRTH)"
+                                 [max]="nowDate"
+                                 name="dateOfBirth"
+                                 placeholder="Date of birth"></app-date-picker>
+            </div>
+            <div class="col-md-6 cl-xs-12">
+                <app-autocomplete [autocompleteFormControl]="personForm.get(PersonFormAttributes.NATIONALITY)"
+                                  [options]="countryOptions"
+                                  name="nationality"
+                                  placeholder="Nationality"></app-autocomplete>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <app-input [inputFormControl]="personForm.get(PersonFormAttributes.OCCUPATION)"
+                           name="occupation"
+                           placeholder="Occupation">
+                </app-input>
+            </div>
+        </div>
+    </app-section>
+
+    <app-section header="ORIGIN INFORMATION">
+        <div class="col-6 cl-xs-12">
+            <app-textarea [inputFormControl]="personForm.get(PersonFormAttributes.INFORMATION_SOURCE)"
+                          appearance="legacy"
+                          name="informationSource"
+                          placeholder="Information source"
+                          inputFormatPlaceholder="web address"></app-textarea>
+        </div>
+    </app-section>
+</form>

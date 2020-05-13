@@ -1,0 +1,26 @@
+<mat-form-field class="w-100">
+    <input matInput
+           [matTooltip]="inputFormControl.errors | validatorMessage"
+           [matTooltipDisabled]="!inputFormControl.touched"
+           matTooltipPosition="below"
+           matTooltipClass="input-validator-messages-tooltip"
+           [name]="name"
+           [placeholder]="placeholder"
+           [type]="type"
+           [formControl]="inputFormControl"
+           [autocomplete]="autocomplete"
+           [required]="FormUtil.hasRequiredField(inputFormControl)"/>
+    <button mat-button matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            *ngIf="showClearButton"
+            (click)="clear()">
+        <mat-icon>close</mat-icon>
+    </button>
+    <mat-hint align="end" *ngIf="minLengthHintValue">
+        minimal {{minLengthHintValue}} characters
+    </mat-hint>
+    <mat-hint align="end" *ngIf="maxLengthHintValue">
+        {{inputFormControl.value?.length}} / {{maxLengthHintValue}}
+    </mat-hint>
+</mat-form-field>

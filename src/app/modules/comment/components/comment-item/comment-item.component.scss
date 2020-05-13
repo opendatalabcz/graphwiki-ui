@@ -1,0 +1,29 @@
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "src/assets/scss/variables";
+
+ul.comment-actions {
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+  padding-left: 0;
+
+  li {
+    display: inline;
+    color: $text-muted;
+    font-size: $small-font-size;
+    font-weight: lighter;
+    cursor: pointer;
+
+    &:not(.action-disabled):hover {
+      text-decoration: underline;
+    }
+
+    &:not(:first-child) {
+      margin-left: 0.5rem;
+    }
+
+    &.action-disabled {
+      opacity: 0.5;
+    }
+  }
+}

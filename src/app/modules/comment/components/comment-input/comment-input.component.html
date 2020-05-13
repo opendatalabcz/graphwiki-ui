@@ -1,0 +1,14 @@
+<div class="mt-2">
+    <span class="small text-muted">{{label}}</span>
+    <form [formGroup]="parentForm" novalidate>
+        <app-textarea [inputFormControl]="parentForm.get(textFormControlName)"
+                      [name]="textFormControlName"
+                      [maxLengthHintValue]="InputLengthConfig.COMMENT"></app-textarea>
+    </form>
+    <div class="comment-input-actions">
+        <a mat-button class="mat-button-active"
+           [disabled]="parentForm.invalid"
+           (click)="action.emit()">{{actionLabel}}</a>
+        <a mat-button (click)="cancel.emit()">Cancel</a>
+    </div>
+</div>

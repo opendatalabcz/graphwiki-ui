@@ -1,0 +1,19 @@
+<div class="container" *ngIf="user">
+    <div class="row">
+        <div class="offset-md-3 col-md-6 col-xs-12">
+            <app-section header="LOGGED USER">
+                <div class="row">
+                    <div class="col-12">
+                        <app-label-value label="Given Name" [value]="user.givenName"></app-label-value>
+                    </div>
+                    <div class="col-12">
+                        <app-label-value label="Family Name" [value]="user.familyName"></app-label-value>
+                    </div>
+                    <div class="col-12">
+                        <app-label-value label="Email" [value]="user.email"></app-label-value>
+                    </div>
+                </div>
+            </app-section>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<mat-list>
+    <h3 mat-subheader>{{header}}</h3>
+    <ng-container *ngIf="relationships?.length">
+        <mat-list-item class="mat-list-item-link" *ngFor="let relationship of relationships">
+            <mat-icon mat-list-icon>{{matIconType}}</mat-icon>
+            <h4 mat-line>
+                <a [routerLink]="[RouteConstants.RELATIONSHIP_DETAIL, relationship.links.self.href]">{{otherVertexResolver(relationship).label}}</a>
+                <span class="text-muted small"> (created {{MomentUtil.fromDateString(relationship.created) | amCalendar}}
+                    )</span>
+            </h4>
+            <p mat-line>{{relationship.type | lowercase}}</p>
+        </mat-list-item>
+    </ng-container>
+    <app-no-available-data *ngIf="!relationships?.length"></app-no-available-data>
+</mat-list>

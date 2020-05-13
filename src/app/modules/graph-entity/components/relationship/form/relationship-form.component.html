@@ -1,0 +1,58 @@
+<form [formGroup]="relationshipForm" novalidate>
+    <ng-container *ngIf="adjacentVerticesChangeAvailable">
+        <app-section header="SOURCE">
+            <app-search [selectedVertexFormControl]="sourceVertexFormControl"
+                        [showSelected]="true"
+                        searchInputPlaceholder="Search source entity"></app-search>
+        </app-section>
+
+        <app-section header="TARGET">
+            <app-search [selectedVertexFormControl]="targetVertexFormControl"
+                        [showSelected]="true"
+                        searchInputPlaceholder="Search target entity"></app-search>
+        </app-section>
+    </ng-container>
+
+    <app-section header="RELATIONSHIP INFORMATION">
+        <div class="row">
+            <div class="col-6 cl-xs-12 d-flex justify-content-between align-items-center">
+                <app-label-value label="Source" [value]="source?.label"></app-label-value>
+                <mat-icon *ngIf="relationshipForm.errors?.uniqueVertex"
+                          class="vertexUniqueError"
+                          matTooltipPosition="below"
+                          matTooltipClass="input-validator-messages-tooltip"
+                          matTooltip="Source and target must not be the same!">error_outline
+                </mat-icon>
+            </div>
+            <div class="col-6 cl-xs-12 d-flex justify-content-between align-items-center">
+                <app-label-value label="Target" [value]="target?.label"></app-label-value>
+                <mat-icon *ngIf="relationshipForm.errors?.uniqueVertex"
+                          class="vertexUniqueError"
+                          matTooltipPosition="below"
+                          matTooltipClass="input-validator-messages-tooltip"
+                          matTooltip="Source and target must not be the same!">error_outline
+                </mat-icon>
+            </div>
+            <div class="col-6 cl-xs-12">
+                <app-textarea [inputFormControl]="relationshipForm.get(RelationshipFormAttributes.INFORMATION_SOURCE)"
+                              appearance="legacy"
+                              name="informationSource"
+                              placeholder="Information source"
+                              inputFormatPlaceholder="web address"></app-textarea>
+            </div>
+            <div class="col-6 cl-xs-12">
+                <app-select [selectFormControl]="relationshipForm.get(RelationshipFormAttributes.TYPE)"
+                            [options]="relationshipTypeOptions"
+                            placeholder="Type"></app-select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <app-textarea [inputFormControl]="relationshipForm.get(RelationshipFormAttributes.DESCRIPTION)"
+                              appearance="legacy"
+                              name="description"
+                              placeholder="Description"></app-textarea>
+            </div>
+        </div>
+    </app-section>
+</form>

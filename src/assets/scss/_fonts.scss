@@ -1,0 +1,48 @@
+@import "src/assets/scss/variables";
+
+.header-lg {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+a.no-style:link {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+a.no-style:visited {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+.display-5 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 1.2
+}
+
+.display-7 {
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.2
+}
+
+.text-black {
+  color: black !important;
+}
+
+.underline-dotted {
+  border-bottom: 1px dotted;
+}
+
+.pseudo-link {
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &.pseudo-link-active {
+    color: $color-link-active;
+  }
+}

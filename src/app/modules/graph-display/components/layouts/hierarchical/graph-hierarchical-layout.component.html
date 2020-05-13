@@ -1,0 +1,94 @@
+<div class="graph-container" xmlns:svg="http://www.w3.org/2000/svg">
+    <ngx-graph xmlns:svg="http://www.w3.org/2000/svg"
+               *ngIf="nodes && edges && settings"
+               [nodes]="nodes"
+               [links]="edges"
+               [layout]="layoutDefinition.layout"
+               [layoutSettings]="layoutDefinition.layoutSettings"
+               [draggingEnabled]="settings.userInteraction.draggingEnabled"
+               [panningEnabled]="settings.userInteraction.panningEnabled"
+               [enableZoom]="settings.userInteraction.zoomEnabled"
+               [zoomSpeed]="settings.userInteraction.zoomSpeed"
+               [panOnZoom]="settings.userInteraction.panOnZoom"
+               [autoZoom]="settings.userInteraction.autoZoom"
+               [autoCenter]="settings.userInteraction.autoCenter"
+               [update$]="settings.userInteraction.refreshSubject"
+               [center$]="settings.userInteraction.centerSubject"
+               [zoomToFit$]="settings.userInteraction.zoomToFitSubject">
+
+        <ng-template #nodeTemplate let-node>
+            <svg:g class="node"
+                   [ngbTooltip]="nodeTooltipTemplate"
+                   #tooltipTrigger="ngbTooltip"
+                   autoClose="outside"
+                   triggers="manual"
+                   container="body"
+                   tooltipClass="tooltip-bg-transparent"
+                   (click)="selectVertex(castNodeData(node), tooltipTrigger)">
+                <svg:circle class="circle-wrapper"
+                            [ngClass]="{'circle-wrapper-active': isActive(node)}"
+                            [attr.cx]="castNode(node).dimension.width/2"
+                            [attr.cy]="castNode(node).dimension.width/4"
+                            [attr.r]="layoutDefinition.config.iconSize">
+                </svg:circle>
+                <svg:image class="icon"
+                           [attr.href]="settings.graphMetadata.iconResolver(castNodeData(node).type)"
+                           [attr.width]="layoutDefinition.config.iconSize"
+                           [attr.height]="layoutDefinition.config.iconSize"
+                           [attr.x]="castNode(node).dimension.width/2 - layoutDefinition.config.iconSize/2"
+                           [attr.y]="castNode(node).dimension.width/4 - layoutDefinition.config.iconSize/2"/>
+                <text [attr.x]="castNode(node).dimension.width/2"
+                      [attr.y]="castNode(node).dimension.width/4 + layoutDefinition.config.iconSize * 1.5"
+                      dominant-baseline="middle"
+                      text-anchor="middle">{{castNode(node).label}}</text>
+            </svg:g>
+        </ng-template>
+
+        <ng-template #nodeTooltipTemplate let-context="context">
+            <div class="p-md-2 p-xs-1 node-tooltip-actions">
+                <a mat-icon-button *ngIf="castTemplateContext(context).vertex.links.graph"
+                   (click)="search(context)">
+                    <mat-icon>search</mat-icon>
+                </a>
+                <a mat-icon-button *ngIf="castTemplateContext(context).vertex.links.self"
+                   [routerLink]="[RouteConstants.GRAPH_ENTITY_DETAIL_GENERIC, castTemplateContext(context).vertex.links.self.href]">
+                    <mat-icon>description</mat-icon>
+                </a>
+            </div>
+        </ng-template>
+
+        <ng-template #linkTemplate let-link>
+            <svg:g class="edge" ngx-tooltip
+                   [attr.transform]="'translate(0,' + -layoutDefinition.config.iconSize + ')'"
+                   [tooltipPlacement]="PlacementTypes.top"
+                   [tooltipType]="StyleTypes.tooltip"
+                   [tooltipTemplate]="edgeTooltipTemplate"
+                   [tooltipContext]="link"
+                   (click)="selectRelationship(link.data)">
+                <svg:path class="line edge-line"/>
+                <svg:text class="edge-label">
+                    <textPath [attr.href]="'#' + link.id"
+                              [style.dominant-baseline]="link.dominantBaseline"
+                              startOffset="50%">
+                        {{link.label | lowercase}}
+                    </textPath>
+                </svg:text>
+            </svg:g>
+        </ng-template>
+
+        <!-- link arrow -->
+        <ng-template #defsTemplate>
+            <svg:marker id="arrow" class="edge-marker"
+                        viewBox="0 -5 10 10" refX="8" refY="0"
+                        markerWidth="8" markerHeight="4" orient="auto">
+                <svg:path d="M0,-5L10,0L0,5" class="arrow-head"/>
+            </svg:marker>
+        </ng-template>
+
+        <ng-template #edgeTooltipTemplate let-model="model">
+            <div class="p-md-2 p-xs-1">
+                <small>click for detail</small>
+            </div>
+        </ng-template>
+    </ngx-graph>
+</div>

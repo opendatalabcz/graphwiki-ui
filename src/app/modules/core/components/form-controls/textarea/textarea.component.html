@@ -1,0 +1,16 @@
+<mat-form-field class="w-100" [appearance]="appearance">
+    <textarea matInput
+              [matTooltip]="inputFormControl.errors | validatorMessage"
+              [matTooltipDisabled]="!inputFormControl.touched"
+              matTooltipPosition="below"
+              matTooltipClass="input-validator-messages-tooltip"
+              cdkTextareaAutosize
+              [name]="name"
+              [required]="FormUtil.hasRequiredField(inputFormControl)"
+              [placeholder]="placeholder"
+              [formControl]="inputFormControl"></textarea>
+    <mat-hint align="end" *ngIf="maxLengthHintValue">
+        {{inputFormControl.value?.length || 0}} / {{maxLengthHintValue}}
+    </mat-hint>
+    <mat-hint align="end" *ngIf="inputFormatPlaceholder">{{inputFormatPlaceholder}}</mat-hint>
+</mat-form-field>

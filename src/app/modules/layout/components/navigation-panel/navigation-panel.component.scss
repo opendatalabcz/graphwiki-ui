@@ -1,0 +1,19 @@
+@import "src/assets/scss/variables";
+
+a.navigation-panel {
+  width: 100%;
+  text-align: left;
+  font-size: 0.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+a.navigation-panel-active {
+  font-weight: bolder;
+}
+
+.navigation-panel-container {
+  border-right: solid 2px $color-dark-blue;
+}

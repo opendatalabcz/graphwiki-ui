@@ -1,0 +1,13 @@
+<app-entity-created-info-message [show]="personCreated"></app-entity-created-info-message>
+
+<app-main-section [formGroup]="personForm" header="NEW PERSON">
+    <ng-container form-button-section>
+        <button mat-flat-button color="primary"
+                *ngIf="createLinkHref"
+                [disabled]="personForm.invalid"
+                (click)="create()">CREATE
+        </button>
+    </ng-container>
+
+    <app-person-form [personForm]="personForm"></app-person-form>
+</app-main-section>

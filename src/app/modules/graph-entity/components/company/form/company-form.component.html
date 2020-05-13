@@ -1,0 +1,39 @@
+<form [formGroup]="companyForm" novalidate>
+    <app-section header="BASIC INFORMATION">
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <app-input [inputFormControl]="companyForm.get(CompanyFormAttributes.OFFICIAL_NAME)"
+                           name="officialName"
+                           placeholder="Official name"></app-input>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <app-input [inputFormControl]="companyForm.get(CompanyFormAttributes.REGISTRATION_NUMBER)"
+                           name="registrationNumber"
+                           placeholder="Registration number"></app-input>
+            </div>
+            <div class="col-md-6 cl-xs-12">
+                <app-date-picker [dateInputFormControl]="companyForm.get(CompanyFormAttributes.INCEPTION)"
+                                 name="inception"
+                                 placeholder="Inception"></app-date-picker>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <app-input [inputFormControl]="companyForm.get(CompanyFormAttributes.INDUSTRY)"
+                           name="industry"
+                           placeholder="Industry"></app-input>
+            </div>
+        </div>
+    </app-section>
+
+    <app-address-form header="HEADQUARTERS"
+                      [addressForm]="companyForm.get(CompanyFormAttributes.HEADQUARTERS)"></app-address-form>
+
+    <app-section header="ORIGIN INFORMATION">
+        <div class="col-6 cl-xs-12">
+            <app-textarea [inputFormControl]="companyForm.get(CompanyFormAttributes.INFORMATION_SOURCE)"
+                          appearance="legacy"
+                          name="informationSource"
+                          placeholder="Information source"
+                          inputFormatPlaceholder="web address"></app-textarea>
+        </div>
+    </app-section>
+</form>

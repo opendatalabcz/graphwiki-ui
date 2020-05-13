@@ -1,0 +1,15 @@
+@import "src/assets/scss/variables";
+
+:host ::ng-deep {
+  .mat-list-item {
+    border-left: 2px solid $color-dark-blue;
+
+    &:not(:first-child) {
+      margin-top: 0.25rem;
+    }
+  }
+
+  .mat-list-item-content {
+    padding: 0 0.5rem !important;
+  }
+}

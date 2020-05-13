@@ -1,0 +1,11 @@
+<div class="text-break">
+    <p class="small text-muted mb-1">{{label}}</p>
+    <p *ngIf="value && type === 'text'">{{value}}</p>
+    <p *ngIf="value && type === 'date'">{{value | amCalendar}}</p>
+    <p *ngIf="value && type === 'link'">
+        <a [routerLink]="routerLinkMetadata">{{value}}</a>
+        <span *ngIf="additionalDescription" class="small text-muted"> {{additionalDescription}}</span>
+    </p>
+    <p *ngIf="value && type === 'external-link'"><a [href]="externalLink" target="_blank">{{value}}</a></p>
+    <p *ngIf="!value" class="font-italic small text-muted">no data</p>
+</div>

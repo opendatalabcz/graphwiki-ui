@@ -1,0 +1,86 @@
+@import "src/assets/scss/variables";
+
+//********** ICONS **********
+.material-icons.md-36 {
+  font-size: 36px !important;
+}
+
+.material-icons {
+  vertical-align: middle !important;
+}
+
+
+//********** LISTS **********
+.mat-list-item-link:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.mat-list-item-link-scalable:hover {
+  transition-property: transform;
+  transition: 0.5s;
+  transform: scale(1.05);
+}
+
+.mat-list-bordered {
+  .mat-list-item {
+    border-bottom: solid 1px $color-darker-grey;
+  }
+}
+
+// responsive mat-list with long text
+.mat-list-item-word-wrap {
+  height: initial !important;
+  padding: 0.5rem !important
+}
+
+.mat-list-item-word-wrap .mat-line {
+  word-wrap: break-word !important;
+  white-space: pre-wrap !important;
+}
+
+.mat-line {
+  font-size: initial;
+}
+
+
+//********** FORM CONTROLS **********
+textarea.cdk-textarea-autosize {
+  overflow-y: hidden !important;
+}
+
+// text are hover border
+.mat-form-field-outline-start, .mat-form-field-outline-gap, .mat-form-field-outline-end {
+  border-width: 1px !important;
+}
+
+.mat-button-active {
+  background-color: $color-mat-button-active;
+}
+
+
+//********** TOOLTIPS **********
+// multiline tooltip
+.multiline-tooltip {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.75rem;
+  white-space: pre-line;
+}
+
+
+//********** TREE NODES **********
+.mat-tree-node {
+  font-size: initial;
+}
+
+
+//********** MENU **********
+.mat-menu-item:focus, .mat-flat-button:focus, .mat-stroked-button:focus, .mat-icon-button:focus {
+  outline: none;
+}
+
+.mat-menu-content {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}

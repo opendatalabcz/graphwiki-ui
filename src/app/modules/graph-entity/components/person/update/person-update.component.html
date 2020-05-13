@@ -1,0 +1,13 @@
+<app-main-section [formGroup]="personForm" header="UPDATE PERSON">
+    <ng-container form-button-section>
+        <button mat-flat-button color="accent"
+                (click)="cancel()">CANCEL
+        </button>
+        <button mat-flat-button color="primary"
+                [disabled]="personForm.invalid"
+                (click)="update()">UPDATE
+        </button>
+    </ng-container>
+
+    <app-person-form [personForm]="personForm"></app-person-form>
+</app-main-section>

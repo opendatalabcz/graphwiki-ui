@@ -1,0 +1,8 @@
+<ng-container *ngIf="errors?.length">
+    <div class="alert alert-danger d-flex justify-content-between align-items-center" *ngFor="let error of errors">
+        <span><strong>An error occurs!</strong> {{error.message}}</span>
+        <button mat-icon-button (click)="dismiss(error)">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</ng-container>

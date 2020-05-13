@@ -1,0 +1,41 @@
+<app-main-section header="ENTITY REQUEST DETAIL" *ngIf="entityRequest">
+    <ng-container form-button-section>
+        <app-task-buttons *ngIf="entityRequest.links.task"
+                          [link]="entityRequest.links.task"
+                          (stateChange)="getData()"></app-task-buttons>
+        <button mat-flat-button color="accent"
+                *ngIf="entityRequest.links.reject"
+                (click)="makeTransition(entityRequest.links.reject)">REJECT
+        </button>
+        <button mat-flat-button color="primary"
+                *ngIf="entityRequest.links.approve"
+                (click)="makeTransition(entityRequest.links.approve)">APPROVE
+        </button>
+    </ng-container>
+
+    <app-section header="OVERVIEW">
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <app-user-info label="Assignee" [link]="entityRequest.assignee"></app-user-info>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <app-label-badge label="State"
+                                 [value]="entityRequest.state"
+                                 [badgeType]="entityRequest.state | entityRequestStateBadge"></app-label-badge>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <app-user-info label="Author" [link]="entityRequest.author"></app-user-info>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <app-label-value label="Created" [value]="entityRequest.created" type="date"></app-label-value>
+            </div>
+        </div>
+    </app-section>
+
+    <app-graph-entity-overview-generic [headerByType]="true"
+                                       [link]="entityRequest.links.entity"></app-graph-entity-overview-generic>
+
+    <app-comments *ngIf="entityRequest.links.commentList"
+                  [createLink]="entityRequest.links.commentCreate"
+                  [commentsLink]="entityRequest.links.commentList"></app-comments>
+</app-main-section>

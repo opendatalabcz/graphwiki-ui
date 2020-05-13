@@ -1,0 +1,13 @@
+<app-main-section [formGroup]="companyForm" header="UPDATE COMPANY">
+    <ng-container form-button-section>
+        <button mat-flat-button color="accent"
+                (click)="cancel()">CANCEL
+        </button>
+        <button mat-flat-button color="primary"
+                [disabled]="companyForm.invalid"
+                (click)="update()">UPDATE
+        </button>
+    </ng-container>
+
+    <app-company-form [companyForm]="companyForm"></app-company-form>
+</app-main-section>
