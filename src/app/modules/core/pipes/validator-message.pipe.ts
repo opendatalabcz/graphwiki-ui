@@ -4,6 +4,7 @@ import {ValidationErrors} from '@angular/forms';
 export enum ErrorType {
     NOT_AVAILABLE_VALUE = 'notAvailableValue',
     REQUIRED = 'required',
+    MIN_LENGTH = 'minlength',
     MAX_LENGTH = 'maxlength',
     MAX = 'max',
     PATTERN = 'pattern',
@@ -22,6 +23,8 @@ export class ValidatorMessagePipe implements PipeTransform {
         switch (error) {
             case ErrorType.REQUIRED:
                 return 'Value is required';
+            case ErrorType.MIN_LENGTH:
+                return 'Value is too short';
             case ErrorType.MAX_LENGTH:
                 return 'Value is too long';
             case ErrorType.MAX:
