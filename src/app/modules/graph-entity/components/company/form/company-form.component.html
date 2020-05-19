@@ -13,6 +13,7 @@
             </div>
             <div class="col-md-6 cl-xs-12">
                 <app-date-picker [dateInputFormControl]="companyForm.get(CompanyFormAttributes.INCEPTION)"
+                                 [max]="nowDate"
                                  name="inception"
                                  placeholder="Inception"></app-date-picker>
             </div>

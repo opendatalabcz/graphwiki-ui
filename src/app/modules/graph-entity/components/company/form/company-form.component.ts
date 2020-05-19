@@ -12,4 +12,5 @@ export class CompanyFormComponent {
     companyForm: FormGroup;
 
     CompanyFormAttributes = CompanyFormAttributes;
+    nowDate = new Date();
 }
